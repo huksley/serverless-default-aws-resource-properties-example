@@ -1,0 +1,84 @@
+service: myproject-public
+frameworkVersion: ^1.83.0
+
+plugins:
+  - serverless-python-requirements
+  - serverless-wsgi
+  - serverless-apigw-binary
+  - serverless-domain-manager
+  - serverless-default-aws-resource-properties
+
+custom:
+  customDomains:
+    - rest:
+        domainName: ${env:CUSTOM_DOMAIN, 'myproject.com'}
+        createRoute53Record: true
+        endpointType: edge
+        enabled: ${env:CUSTOM_DOMAIN_ENABLED, 'false'}
+    - rest:
+        domainName: ${env:CUSTOM_DOMAIN_WWW, 'www.myproject.com'}
+        createRoute53Record: true
+        endpointType: edge
+        enabled: ${env:CUSTOM_DOMAIN_ENABLED, 'false'}
+  wsgi:
+    app: app.app
+    packRequirements: false
+  pythonRequirements:
+    dockerizePip: non-linux
+  # Add binary images as handled in API gateway
+  apigwBinary:
+    types:
+      - "image/*"
+      - "application/font*"
+      - "application/pdf"
+      # This allows binary conversion without Accept: image/* in request
+      - "*/*"
+  defaultAwsProperties:
+    # Block public access for all S3 buckets
+    - Type: AWS::S3::Bucket
+      Properties:
+        PublicAccessBlockConfiguration:
+          BlockPublicAcls: true
+          BlockPublicPolicy: true
+          IgnorePublicAcls: true
+          RestrictPublicBuckets: true
+
+provider:
+  name: aws
+  runtime: python3.8
+  timeout: 30
+  stage: default
+  memorySize: 2048
+  region: eu-west-1
+  logRetentionInDays: 30
+  environment:
+    FLASK_SECRET_KEY: ${env:FLASK_SECRET_KEY}
+  tags:
+    project: "myproject"
+    component: "public"
+  stackTags:
+    project: "myproject"
+    component: "public"
+  deploymentBucket:
+    tags:
+      project: "myproject"
+      component: "public"
+
+package:
+  exclude:
+    - "README.md"
+    - ".editorconfig"
+    - "LICENSE.md"
+    - ".git/**"
+    - ".github/**"
+    - ".vscode/**"
+    - ".gitignore"
+    - "node_modules/**"
+    - "test/**"
+
+functions:
+  app:
+    handler: wsgi_handler.handler
+    events:
+      - http: ANY /
+      - http: "ANY {proxy+}"

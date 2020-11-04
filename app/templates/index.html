@@ -1,0 +1,27 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Myproject</title>
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename = 'icon.svg') }}" />
+  <link rel="apple-touch-icon" type="image/png" href="{{ url_for('static', filename = 'icon.svg') }}" />
+  <link rel="canonical" href="https://myproject.com" />
+  <meta name="author" content="Myproject" />
+  <meta name="theme-color" content="#4caf50" />
+  <meta name="description" content="To be announced" />
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:site" content="@Myproject" />
+  <meta property="og:site_name" content="Myproject" />
+  <meta property="og:url" content="https://Myproject.com" />
+  <meta property="og:title" content="Title" />
+  <meta property="og:description" content="To be announced" />
+  <meta property="og:locale" content="en-us" />
+  <meta property="og:type" content="article" />
+</head>
+
+<body class="index">
+  {{ content|safe }}
+</body>
+
+</html>

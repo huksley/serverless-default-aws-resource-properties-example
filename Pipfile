@@ -1,0 +1,28 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pylint = "*"
+autopep8 = "*"
+watchdog = "*"
+argh = "*"
+pyyaml = "*"
+
+[packages]
+flask = "*"
+dnspython = "*"
+boto3 = "*"
+flask-caching = "*"
+requests = "*"
+
+[requires]
+python_version = "3.8"
+
+[scripts]
+python = "chamber exec myproject/public -- python"
+app = "chamber exec myproject/public -- python -m app"
+lint = "chamber exec myproject/public -- pylint app"
+deploy = "chamber exec myproject/public -- npx serverless deploy"
+sls = "chamber exec myproject/public -- npx serverless"
