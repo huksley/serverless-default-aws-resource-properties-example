@@ -21,8 +21,8 @@ requests = "*"
 python_version = "3.8"
 
 [scripts]
-python = "chamber exec myproject/public -- python"
-app = "chamber exec myproject/public -- python -m app"
-lint = "chamber exec myproject/public -- pylint app"
-deploy = "chamber exec myproject/public -- npx serverless deploy"
-sls = "chamber exec myproject/public -- npx serverless"
+python = "python"
+app = "python -m app"
+lint = "pylint app"
+deploy = "npx serverless deploy"
+sls = "npx serverless"
