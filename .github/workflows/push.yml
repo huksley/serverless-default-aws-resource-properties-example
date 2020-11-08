@@ -53,5 +53,5 @@ jobs:
         id: deployed
         uses: ./.github/serverless-output-url
       - name: Show URL
-        run: echo "URL slug is ${{ steps.deployed.outputs.url }}"
+        run: echo "App deployed at ${{ steps.deployed.outputs.url }}"
 

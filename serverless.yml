@@ -5,6 +5,9 @@ plugins:
   - serverless-python-requirements
   - serverless-wsgi
   - serverless-apigw-binary
+  - serverless-plugin-test-helper
+  - serverless-s3-block-public-access
+
 custom:
   wsgi:
     app: app.app
