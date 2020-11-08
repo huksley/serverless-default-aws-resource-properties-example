@@ -31,6 +31,8 @@ provider:
   memorySize: 2048
   region: eu-west-1
   logRetentionInDays: 30
+  apiGateway:
+    shouldStartNameWithService: true
   environment:
     FLASK_SECRET_KEY: ${env:FLASK_SECRET_KEY}
   tags:
@@ -61,4 +63,4 @@ functions:
     handler: wsgi_handler.handler
     events:
       - http: ANY /
-      - http: "ANY {proxy+}"
+      - http: "ANY /{proxy+}"
