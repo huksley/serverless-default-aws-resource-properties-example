@@ -6,20 +6,7 @@ plugins:
   - serverless-wsgi
   - serverless-apigw-binary
   - serverless-domain-manager
-  - serverless-default-aws-resource-properties
-
 custom:
-  customDomains:
-    - rest:
-        domainName: ${env:CUSTOM_DOMAIN, 'myproject.com'}
-        createRoute53Record: true
-        endpointType: edge
-        enabled: ${env:CUSTOM_DOMAIN_ENABLED, 'false'}
-    - rest:
-        domainName: ${env:CUSTOM_DOMAIN_WWW, 'www.myproject.com'}
-        createRoute53Record: true
-        endpointType: edge
-        enabled: ${env:CUSTOM_DOMAIN_ENABLED, 'false'}
   wsgi:
     app: app.app
     packRequirements: false
@@ -33,15 +20,6 @@ custom:
       - "application/pdf"
       # This allows binary conversion without Accept: image/* in request
       - "*/*"
-  defaultAwsProperties:
-    # Block public access for all S3 buckets
-    - Type: AWS::S3::Bucket
-      Properties:
-        PublicAccessBlockConfiguration:
-          BlockPublicAcls: true
-          BlockPublicPolicy: true
-          IgnorePublicAcls: true
-          RestrictPublicBuckets: true
 
 provider:
   name: aws
