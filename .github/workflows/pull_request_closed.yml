@@ -46,9 +46,6 @@ jobs:
       - name: Undeploy now
         id: undeploy
         env: 
-          CUSTOM_DOMAIN_ENABLED: true
-          CUSTOM_DOMAIN: "${{ steps.slugify.outputs.slug }}.dev.valoisan.com"
-          CUSTOM_DOMAIN_WWW_ENABLED: false
           AWS_REGION: "eu-west-1"
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

@@ -5,7 +5,6 @@ plugins:
   - serverless-python-requirements
   - serverless-wsgi
   - serverless-apigw-binary
-  - serverless-domain-manager
 custom:
   wsgi:
     app: app.app
