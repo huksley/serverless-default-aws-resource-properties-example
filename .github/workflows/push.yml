@@ -54,4 +54,10 @@ jobs:
         uses: ./.github/serverless-output-url
       - name: Show URL
         run: echo "App deployed at ${{ steps.deployed.outputs.url }}"
-
+      - name: Comment PR
+        uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          msg: "App deployed at ${{ steps.deployed.outputs.url }}"
+          check_for_duplicate_msg: true

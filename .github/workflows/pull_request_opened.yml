@@ -58,7 +58,10 @@ jobs:
       - name: Show URL
         run: echo "App deployed at ${{ steps.deployed.outputs.url }}"
       - name: Comment PR
-        uses: allthatjazzleo/actions-pull-request-add-comment@master
-        with:
-          message: "App deployed at ${{ steps.deployed.outputs.url }}"
+        uses: unsplash/comment-on-pr@master
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          msg: "App deployed at ${{ steps.deployed.outputs.url }}"
+          check_for_duplicate_msg: true
+

@@ -52,7 +52,9 @@ jobs:
           FLASK_SECRET_KEY: ${{ secrets.FLASK_SECRET_KEY }}
         run: pipenv run undeploy --stage "dev-${{ steps.slugify.outputs.slug }}"
       - name: Comment PR
-        uses: allthatjazzleo/actions-pull-request-add-comment@master
-        with:
-          message: "App undeployed"
+        uses: unsplash/comment-on-pr@master
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          msg: "App undeployed"
+          check_for_duplicate_msg: true
